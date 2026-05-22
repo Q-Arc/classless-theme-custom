@@ -1,38 +1,43 @@
 {{ define "main" }}
 <section>
-  <h1>{{ .Title }}</h1>
+  <h1 style="font-family: monospace;"># {{ .Title }}</h1>
 
+  {{/* Loop through tagged posts: newest first, with pagination */}}
   {{ $paginator := .Paginate (.Pages.ByDate.Reverse) }}
   {{ range $paginator.Pages }}
-  <article>
-    <h4>
+  <article style="margin-bottom: 2rem;">
+    <h4 style="margin-bottom: 0.25rem;">
       <a href="{{ .Permalink }}">{{ .Title }}</a>
     </h4>
-    {{ if .Description }}
-    <p>{{ .Description }}</p>
-    {{ else }}
-    <p>{{ .Summary }}</p>
-    {{ end }}
-    <p><em><small><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time></small></em></p>
+
+    <p style="margin-top: 0; margin-bottom: 0.5rem; font-size: 0.95rem;">
+      {{ if .Description }}{{ .Description }}{{ else }}{{ .Summary }}{{ end }}
+    </p>
+
+    <small><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time></small>
   </article>
   {{ end }}
 
+  {{/* Clean TUI-Style Pagination Controls */}}
   {{ if gt $paginator.TotalPages 1 }}
-  <p>
+  <hr />
+  <nav aria-label="Pagination" style="font-family: monospace;">
     {{ if $paginator.HasPrev }}
-    <a href="{{ $paginator.Prev.URL }}">&larr; {{ i18n "previous" | default "Previous" }}</a>
+    <a href="{{ $paginator.Prev.URL }}">&larr; Prev</a>
     {{ end }}
+
     {{ range $paginator.Pagers }}
       {{ if eq . $paginator }}
-      <strong>{{ .PageNumber }}</strong>
+      <strong>[{{ .PageNumber }}]</strong>
       {{ else }}
       <a href="{{ .URL }}">{{ .PageNumber }}</a>
       {{ end }}
     {{ end }}
+
     {{ if $paginator.HasNext }}
-    <a href="{{ $paginator.Next.URL }}">{{ i18n "next" | default "Next" }} &rarr;</a>
+    <a href="{{ $paginator.Next.URL }}">Next &rarr;</a>
     {{ end }}
-  </p>
+  </nav>
   {{ end }}
 </section>
 {{ end }}

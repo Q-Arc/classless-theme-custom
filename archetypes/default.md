@@ -1,8 +1,8 @@
 ---
-date: '{{ .Date }}'
-draft: true
 title: '{{ replace .File.ContentBaseName "-" " " | title }}'
-description: ''
+date: '{{ .Date }}'
+description: 'A brief terminal snippet summary or configuration log description.'
+draft: true
+toc: true
 tags: []
-categories: []
 ---

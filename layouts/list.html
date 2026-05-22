@@ -1,41 +1,42 @@
-{{- /* layouts/_default/list.html */ -}}
 {{ define "main" }}
 <section>
-  {{- partial "breadcrumb.html" . -}}
-  {{/* Render _index.md content if it exists */}}
+  {{/* Render the page title and any intro text from your _index.md */}}
   {{ if .Content }}
-  <h1>{{.Title}}</h1>
+  <h1>{{ .Title }}</h1>
   <div>{{ .Content }}</div>
   {{ end }}
 
-  {{/* Loop through pages, newest first, with pagination */}}
+  {{/* Loop through posts: newest first, with pagination */}}
   {{ $paginator := .Paginate (.Pages.ByDate.Reverse) }}
   {{ range $paginator.Pages }}
-  <article>
-    <h4>
+  <article style="margin-bottom: 1.5rem;">
+    <h4 style="margin-bottom: 0.25rem;">
       <a href="{{ .Permalink }}">{{ .Title }}</a>
     </h4>
-    <p><em><small><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time></small></em></p>
+    <small><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time></small>
   </article>
   {{ end }}
 
-  {{/* Pagination controls */}}
+  {{/* Clean Pagination Controls */}}
   {{ if gt $paginator.TotalPages 1 }}
-  <p>
+  <hr />
+  <nav aria-label="Pagination" style="font-family: monospace;">
     {{ if $paginator.HasPrev }}
-    <a href="{{ $paginator.Prev.URL }}">&larr; {{ i18n "previous" | default "Previous" }}</a>
+    <a href="{{ $paginator.Prev.URL }}">&larr; Prev</a>
     {{ end }}
+
     {{ range $paginator.Pagers }}
       {{ if eq . $paginator }}
-      <strong>{{ .PageNumber }}</strong>
+      <strong>[{{ .PageNumber }}]</strong>
       {{ else }}
       <a href="{{ .URL }}">{{ .PageNumber }}</a>
       {{ end }}
     {{ end }}
+
     {{ if $paginator.HasNext }}
-    <a href="{{ $paginator.Next.URL }}">{{ i18n "next" | default "Next" }} &rarr;</a>
+    <a href="{{ $paginator.Next.URL }}">Next &rarr;</a>
     {{ end }}
-  </p>
+  </nav>
   {{ end }}
 
 </section>

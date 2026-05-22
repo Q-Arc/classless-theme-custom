@@ -23,21 +23,15 @@
     text-size-adjust: 100%;
   }
 
-  /* always center images */
-  img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
+  /* Always center images and content figures layout-wise */
+  img,
   figcaption {
     display: block;
     margin-left: auto;
     margin-right: auto;
   }
 
-
-  /* navbar (scoped to header to avoid affecting ToC nav) */
+  /* Navbar (scoped to header to avoid affecting ToC nav blocks) */
   header nav {
     display: flex;
     justify-content: space-between;
@@ -46,8 +40,8 @@
     gap: 1rem;
     overflow: visible;
     padding: 0.5rem 0;
-    margin-bottom: 1rem;
-    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    font-size: 1.15rem;
   }
 
   header nav ul {
@@ -59,16 +53,18 @@
     align-items: center;
   }
 
+  /* TUI Pipe Divider Insertion */
   header nav ul li + li::before {
     content: "|";
-    padding: 0 0.4rem;
-    opacity: 0.4;
+    padding: 0 0.5rem;
+    opacity: 0.5;
+    font-family: monospace;
   }
 
   header nav a.active {
     font-weight: 700;
-    text-decoration: underline;
-    text-underline-offset: 0.2em;
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
   }
 
   @media (max-width: 600px) {
@@ -79,13 +75,13 @@
     }
   }
 
-  /* Dark mode toggle button */
+  /* Dark mode toggle icon container definitions */
   .dark-mode-toggle {
     background: none;
     border: none;
     cursor: pointer;
     padding: 0.25rem;
-    margin: 0;
+    margin: 0 0 0 0.5rem;
     min-height: auto;
     min-width: auto;
     display: inline-flex;
@@ -114,25 +110,48 @@
   }
 
   .dark-mode-toggle svg {
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1.2rem;
+    height: 1.2rem;
     fill: currentColor;
   }
 
-  .dark-mode-toggle .icon-sun { display: none; }
-  .dark-mode-toggle .icon-moon { display: none; }
-  .dark-mode-toggle .icon-system { display: block; }
+  .dark-mode-toggle .icon-sun {
+    display: none;
+  }
+  .dark-mode-toggle .icon-moon {
+    display: none;
+  }
+  .dark-mode-toggle .icon-system {
+    display: block;
+  }
 
-  html[data-theme-pref="light"] .dark-mode-toggle .icon-sun { display: block; }
-  html[data-theme-pref="light"] .dark-mode-toggle .icon-moon { display: none; }
-  html[data-theme-pref="light"] .dark-mode-toggle .icon-system { display: none; }
+  html[data-theme-pref="light"] .dark-mode-toggle .icon-sun {
+    display: block;
+  }
+  html[data-theme-pref="light"] .dark-mode-toggle .icon-moon {
+    display: none;
+  }
+  html[data-theme-pref="light"] .dark-mode-toggle .icon-system {
+    display: none;
+  }
 
-  html[data-theme-pref="dark"] .dark-mode-toggle .icon-sun { display: none; }
-  html[data-theme-pref="dark"] .dark-mode-toggle .icon-moon { display: block; }
-  html[data-theme-pref="dark"] .dark-mode-toggle .icon-system { display: none; }
+  html[data-theme-pref="dark"] .dark-mode-toggle .icon-sun {
+    display: none;
+  }
+  html[data-theme-pref="dark"] .dark-mode-toggle .icon-moon {
+    display: block;
+  }
+  html[data-theme-pref="dark"] .dark-mode-toggle .icon-system {
+    display: none;
+  }
 
-  html[data-theme-pref="system"] .dark-mode-toggle .icon-sun { display: none; }
-  html[data-theme-pref="system"] .dark-mode-toggle .icon-moon { display: none; }
-  html[data-theme-pref="system"] .dark-mode-toggle .icon-system { display: block; }
-
+  html[data-theme-pref="system"] .dark-mode-toggle .icon-sun {
+    display: none;
+  }
+  html[data-theme-pref="system"] .dark-mode-toggle .icon-moon {
+    display: none;
+  }
+  html[data-theme-pref="system"] .dark-mode-toggle .icon-system {
+    display: block;
+  }
 </style>

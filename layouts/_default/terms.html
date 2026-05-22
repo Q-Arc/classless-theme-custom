@@ -1,10 +1,13 @@
 {{ define "main" }}
 <section>
-  <h1>{{ .Title }}</h1>
-  <ul>
+  <h1 style="font-family: monospace;">ls /{{ .Title | lower }}</h1>
+
+  <ul style="font-family: monospace; list-style-type: none; padding-left: 0;">
     {{- range .Pages.ByTitle -}}
-    <li>
-      <a href="{{ .Permalink }}">{{ .Title }}</a> ({{ .Pages | len }})
+    <li style="margin-bottom: 0.5rem;">
+      <span style="color: var(--accent);">#</span>
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+      <span style="opacity: 0.6;">[{{ .Pages | len }}]span>
     </li>
     {{- end -}}
   </ul>

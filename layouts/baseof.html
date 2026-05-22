@@ -67,28 +67,23 @@
   <a id="skip-link" href="#main-content">{{ i18n "skipToContent" | default "Skip to content" }}</a>
 
   <header>
-
-    {{- if .Site.Params.themes -}}
-    {{ partial "theme-selector.html" . }}
-    {{- end -}}
-    <nav aria-label="{{ i18n "mainNavigation" | default "Main navigation" }}">
-      <ul>
-        <li><strong>{{ .Site.Title }}</strong></li>
-      </ul>
-      <ul>
-        {{- if .Site.Menus.main -}}
-        {{- range .Site.Menus.main -}}
-        {{- $active := or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) -}}
-        <li>
-          <a href="{{ .URL | relURL }}"{{ if $active }} class="active" aria-current="page"{{ end }}>{{ .Name }}</a>
-        </li>
-        {{- end -}}
-        {{- end -}}
-        {{- partial "dark-mode-toggle.html" . -}}
-      </ul>
-    </nav>
-
-  </header>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><strong>{{ .Site.Title }}</strong></li>
+        </ul>
+        <ul>
+          {{- if .Site.Menus.main -}}
+          {{- range .Site.Menus.main -}}
+          {{- $active := or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) -}}
+          <li>
+            <a href="{{ .URL | relURL }}"{{ if $active }} class="active" aria-current="page"{{ end }}>{{ .Name }}</a>
+          </li>
+          {{- end -}}
+          {{- end -}}
+          {{- partial "dark-mode-toggle.html" . -}}
+        </ul>
+      </nav>
+    </header>
 
   <main id="main-content">
     {{- block "main" . }}{{ end -}}
@@ -99,9 +94,6 @@
   </footer>
 
 </body>
-{{ if or .Params.quickjs .Site.Params.quickjs }}{{ partial "quickjs.html" . }}{{ end }}
-{{ if or .Params.math .Site.Params.math }}{{ partial "math.html" . }}{{ end }}
-{{ partial "mermaid.html" . }}
-{{ template "_internal/google_analytics.html" . }}
+{{ if or .Params.mermaid .Site.Params.mermaid }}{{ partial "mermaid.html" . }}{{ end }}
 
 </html>

@@ -3,15 +3,19 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    // Determine the theme based solely on the user's OS preference.
-    const mermaidTheme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
-      ? 'dark'
-      : 'default'; // 'default' is the light theme
+    // 1. Check your site's active theme attribute directly
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+
+    // 2. Fall back to system preference if the attribute isn't set yet
+    const isDark = currentTheme
+      ? currentTheme === "dark"
+      : window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
 
     mermaid.initialize({
       startOnLoad: true,
-      theme: mermaidTheme,
-      securityLevel: 'loose'
+      theme: isDark ? "dark" : "default",
+      securityLevel: "loose",
     });
   });
 </script>

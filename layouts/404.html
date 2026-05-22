@@ -1,5 +1,16 @@
 {{ define "main" }}
-  <h1>{{ i18n "notFoundTitle" | default "404: Page Not Found" }}</h1>
-  <p>{{ i18n "notFoundMessage" | default "Sorry, the page you were looking for doesn't exist." }}</p>
-  <p><a href="{{ "/" | relURL }}">{{ i18n "notFoundBack" | default "Go back to the homepage" }}</a></p>
+<div class="terminal-404">
+  <h1 style="color: var(--accent); font-family: monospace;">$ click_link</h1>
+  <p style="font-family: monospace; font-weight: bold; color: #ff5555;">
+    [ERROR] 404: SIGSEGV - Page Not Found
+  </p>
+
+  <blockquote>
+    <p>The requested memory address or URL does not exist in this namespace. It may have been garbage collected, unlinked, or never committed in the first place.</p>
+  </blockquote>
+
+  <p style="font-family: monospace;">
+    <span style="color: #55ff55;">➜</span> <a href="{{ "/" | relURL }}">cd ~ /home/ayush</a>
+  </p>
+</div>
 {{ end }}
